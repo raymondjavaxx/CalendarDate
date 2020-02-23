@@ -25,6 +25,7 @@
 
 import Foundation
 
+/// Groups CalendarDate and CalendarTime to represent a date + time.
 public struct CalendarDateTime {
 
     public let date: CalendarDate
@@ -46,6 +47,11 @@ public struct CalendarDateTime {
         self.time = time
     }
 
+    /// Converts the CalendarDateTime to a Swift date.
+    ///
+    /// - Parameters:
+    ///     - timezone: The timezone to use when coverting to `Date`.
+    ///         Defaults to current timezone.
     public func asDate(timezone: TimeZone = .current) -> Date {
         let components = DateComponents(
             calendar: .gregorian,
@@ -67,6 +73,7 @@ public struct CalendarDateTime {
         return date
     }
 
+    /// Returns the ISO 8601 representation of the calendar date-time
     public func iso8601() -> String {
         return String(format: "%@T%@", date.iso8601(), time.iso8601())
     }

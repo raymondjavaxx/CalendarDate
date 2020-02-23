@@ -25,6 +25,7 @@
 
 import Foundation
 
+/// Represents a calendar date, such as a birthday.
 public struct CalendarDate {
 
     public let year: Int
@@ -45,7 +46,21 @@ public struct CalendarDate {
         self.day = day
     }
 
-    public func asDate() -> Date {
+    /// Converts the CalendarDate to a Swift `Date`.
+    ///
+    /// - Parameters:
+    ///     - timezone: The timezone to use when coverting to `Date`.
+    ///         Defaults to current timezone.
+    public func asDate(timezone: TimeZone = .current) -> Date {
+        let components = DateComponents(
+            calendar: .gregorian,
+            timeZone: timezone,
+
+            year: year,
+            month: month,
+            day: day
+        )
+
         guard let date = Calendar.gregorian.date(from: components) else {
             preconditionFailure("Invalid date")
         }
@@ -53,6 +68,7 @@ public struct CalendarDate {
         return date
     }
 
+    /// Returns the ISO 8601 representation of the calendar date.
     public func iso8601() -> String {
         return String(format: "%04d-%02d-%02d", year, month, day)
     }

@@ -25,6 +25,7 @@
 
 import Foundation
 
+/// Represents a wall time, such as "2:00 PM".
 public struct CalendarTime {
 
     public let hour: Int
@@ -45,10 +46,15 @@ public struct CalendarTime {
         self.second = second
     }
 
-    public func asDate() -> Date {
+    /// Converts the CalendarTime to a Swift `Date`.
+    ///
+    /// - Parameters:
+    ///     - timezone: The timezone to use when coverting to `Date`.
+    ///         Defaults to current timezone.
+    public func asDate(timezone: TimeZone = .current) -> Date {
         let components = DateComponents(
             calendar: .gregorian,
-            timeZone: .current,
+            timeZone: timezone,
             hour: hour,
             minute: minute,
             second: second
@@ -61,6 +67,7 @@ public struct CalendarTime {
         return date
     }
 
+    /// Returns the ISO 8601 representation of the time.
     public func iso8601() -> String {
         return String(format: "%02d:%02d:%02d", hour, minute, second)
     }
