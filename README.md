@@ -1,3 +1,5 @@
+[![Build](https://github.com/raymondjavaxx/CalendarDate/workflows/Build/badge.svg)](https://github.com/raymondjavaxx/CalendarDate/actions)
+
 # CalendarDate
 
 Calendar dates for Swift, built around [DateComponents](https://developer.apple.com/documentation/foundation/datecomponents). Provides value objects for representing dates and times that are not directly bound to specific UTC offsets or timezones. This is useful when [working with future events](http://www.creativedeletion.com/2015/03/19/persisting_future_datetimes.html), as in the case of event and appointment scheduling apps.
