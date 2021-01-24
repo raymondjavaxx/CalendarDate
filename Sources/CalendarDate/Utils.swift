@@ -1,5 +1,5 @@
 //
-//  Internal.swift
+//  Utils.swift
 //  CalendarDate
 //
 //  Copyright (c) 2019 Ramon Torres
@@ -27,34 +27,4 @@ import Foundation
 
 extension Calendar {
     static let gregorian = Calendar(identifier: .gregorian)
-}
-
-enum ParsingError: Error {
-    case unexpectedCharacter
-}
-
-class Parser {
-
-    private let scanner: Scanner
-
-    init(string: String) {
-        self.scanner = Scanner(string: string)
-    }
-
-    func parseInt() throws -> Int {
-        var result: Int = 0
-
-        guard scanner.scanInt(&result) else {
-            throw ParsingError.unexpectedCharacter
-        }
-
-        return result
-    }
-
-    func parseString(_ searchString: String) throws {
-        guard scanner.scanString(searchString, into: nil) else {
-            throw ParsingError.unexpectedCharacter
-        }
-    }
-
 }
