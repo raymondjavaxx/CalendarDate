@@ -75,7 +75,7 @@ public struct CalendarDateTime {
 
     /// Returns the ISO 8601 representation of the calendar date-time
     public func iso8601() -> String {
-        return String(format: "%@T%@", date.iso8601(), time.iso8601())
+        return "\(date.iso8601())T\(time.iso8601())"
     }
 
 }

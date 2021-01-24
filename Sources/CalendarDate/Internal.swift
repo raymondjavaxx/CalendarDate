@@ -58,27 +58,3 @@ class Parser {
     }
 
 }
-
-extension Scanner {
-
-    #if os(macOS)
-    func scanInt() -> Int? {
-        var result: Int = 0
-        return scanInt(&result) ? result : nil
-    }
-    #endif
-
-    #if os(Linux)
-    func scanString(_ string: String) -> String? {
-        var buffer: String?
-        _ = scanString(string, into: &buffer)
-        return buffer
-    }
-    #elseif os(iOS) || os(macOS)
-    func scanString(_ string: String) -> String? {
-        var buffer: NSString?
-        _ = scanString(string, into: &buffer)
-        return buffer as String?
-    }
-    #endif
-}
