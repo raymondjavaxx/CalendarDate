@@ -15,9 +15,9 @@ class CalendarDateTests: XCTestCase {
     }
 
     func testComparingWithEqualValues() {
-        let a = CalendarDate(year: 2019, month: 11, day: 3)
-        let b = CalendarDate(year: 2019, month: 11, day: 3)
-        XCTAssertTrue(a == b)
+        let first = CalendarDate(year: 2019, month: 11, day: 3)
+        let second = CalendarDate(year: 2019, month: 11, day: 3)
+        XCTAssertTrue(first == second)
     }
 
 }

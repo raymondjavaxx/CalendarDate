@@ -15,9 +15,9 @@ class CalendarTimeTests: XCTestCase {
     }
 
     func testComparingWithEqualValues() {
-        let a = CalendarTime(hour: 10, minute: 45, second: 0)
-        let b = CalendarTime(hour: 10, minute: 45, second: 0)
-        XCTAssertTrue(a == b)
+        let first = CalendarTime(hour: 10, minute: 45, second: 0)
+        let second = CalendarTime(hour: 10, minute: 45, second: 0)
+        XCTAssertTrue(first == second)
     }
 
 }
