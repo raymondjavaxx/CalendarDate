@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: YOCKOW/Action-setup-swift@main
+      - uses: YOCKOW/Action-setup-swift@v1
       - name: Build
         run: swift build -v
       - name: Run tests
