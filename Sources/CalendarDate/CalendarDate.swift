@@ -98,11 +98,11 @@ extension CalendarDate: Comparable {
 extension CalendarDate {
 
     internal init(from parser: Parser) throws {
-        let year = try parser.parseInt()  // NN
-        try parser.parseString("-")       // -
-        let month = try parser.parseInt() // NN
-        try parser.parseString("-")       // -
-        let day = try parser.parseInt()   // NN
+        let year = try parser.parseInt(expectedLength: 4)  // YYYY
+        try parser.parseString("-") // -
+        let month = try parser.parseInt(expectedLength: 2) // MM
+        try parser.parseString("-") // -
+        let day = try parser.parseInt(expectedLength: 2)   // DD
         self.init(year: year, month: month, day: day)
     }
 

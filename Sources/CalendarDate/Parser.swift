@@ -27,6 +27,7 @@ import Foundation
 
 enum ParsingError: Error {
     case unexpectedCharacter
+    case unexpectedIntLength
 }
 
 class Parser {
@@ -35,13 +36,24 @@ class Parser {
 
     init(string: String) {
         self.scanner = Scanner(string: string)
+        // `Scanner` will skip whitespace by default, so we need to disable that.
+        self.scanner.charactersToBeSkipped = nil
     }
 
-    func parseInt() throws -> Int {
+    func parseInt(expectedLength: Int? = nil) throws -> Int {
+        let initialLocation = scanner.scanLocation
+
         var result: Int = 0
 
         guard scanner.scanInt(&result) else {
             throw ParsingError.unexpectedCharacter
+        }
+
+        if let expectedLength = expectedLength {
+            let length = scanner.scanLocation - initialLocation
+            guard length == expectedLength else {
+                throw ParsingError.unexpectedIntLength
+            }
         }
 
         return result

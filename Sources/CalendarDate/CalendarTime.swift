@@ -98,11 +98,11 @@ extension CalendarTime: Comparable {
 extension CalendarTime {
 
     internal init(from parser: Parser) throws {
-        let hour = try parser.parseInt()   // NN
-        try parser.parseString(":")        // :
-        let minute = try parser.parseInt() // NN
-        try parser.parseString(":")        // :
-        let second = try parser.parseInt() // NN
+        let hour = try parser.parseInt(expectedLength: 2) // hh
+        try parser.parseString(":") // :
+        let minute = try parser.parseInt(expectedLength: 2) // mm
+        try parser.parseString(":") // :
+        let second = try parser.parseInt(expectedLength: 2) // ss
         self.init(hour: hour, minute: minute, second: second)
     }
 
