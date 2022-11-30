@@ -20,4 +20,17 @@ class CalendarTimeTests: XCTestCase {
         XCTAssertTrue(first == second)
     }
 
+    func testIsValid() {
+        XCTAssertTrue(CalendarTime(hour: 0, minute: 0, second: 0).isValid)
+        XCTAssertTrue(CalendarTime(hour: 23, minute: 59, second: 59).isValid)
+
+        XCTAssertFalse(CalendarTime(hour: -1, minute: 0, second: 0).isValid)
+        XCTAssertFalse(CalendarTime(hour: 0, minute: -1, second: 0).isValid)
+        XCTAssertFalse(CalendarTime(hour: 0, minute: 0, second: -1).isValid)
+
+        XCTAssertFalse(CalendarTime(hour: 24, minute: 59, second: 59).isValid)
+        XCTAssertFalse(CalendarTime(hour: 23, minute: 60, second: 59).isValid)
+        XCTAssertFalse(CalendarTime(hour: 23, minute: 59, second: 60).isValid)
+    }
+
 }
