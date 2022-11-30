@@ -32,11 +32,12 @@ public struct CalendarTime {
     public let minute: Int
     public let second: Int
 
+    /// Whether or not the time is valid.
     public var isValid: Bool {
         return (
             hour   >= 0 && hour   <= 23 &&
             minute >= 0 && minute <= 59 &&
-            second >= 0 && hour   <= 59
+            second >= 0 && second <= 59
         )
     }
 
