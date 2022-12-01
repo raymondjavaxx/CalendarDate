@@ -25,5 +25,8 @@ jobs:
   lint:
     runs-on: ubuntu-lastest
     steps:
-      - name: GitHub Action for SwiftLint
+      - name: SwiftLint
         uses: norio-nomura/action-swiftlint@3.2.1
+        with:
+          args: --strict
+
