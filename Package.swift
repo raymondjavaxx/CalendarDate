@@ -7,7 +7,7 @@ let package = Package(
     name: "CalendarDate",
     platforms: [
         .iOS(.v13),
-        .tvOS(.v11),
+        .tvOS(.v13),
         .macOS(.v10_15)
     ],
     products: [
