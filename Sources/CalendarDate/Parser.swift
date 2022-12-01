@@ -75,7 +75,7 @@ final class Parser {
     }
 
     func parseString(_ searchString: String) throws {
-        guard scanner.scanString(searchString) != nil else {
+        guard scanner.scanString(searchString) == searchString else {
             throw ParsingError.unexpectedCharacter(index: currentIndex)
         }
     }
