@@ -26,22 +26,45 @@
 import Foundation
 
 enum ParsingError: Error {
-    case unexpectedCharacter
+    case unexpectedCharacter(index: Int)
+    case unexpectedIntLength(index: Int)
 }
 
-class Parser {
+extension ParsingError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .unexpectedCharacter(let index):
+            return "Unexpected character at index \(index)."
+        case .unexpectedIntLength(let index):
+            return "Unexpected integer length at index \(index)."
+        }
+    }
+}
+
+final class Parser {
 
     private let scanner: Scanner
 
     init(string: String) {
         self.scanner = Scanner(string: string)
+        // `Scanner` will skip whitespace by default, so we need to disable that.
+        self.scanner.charactersToBeSkipped = nil
     }
 
-    func parseInt() throws -> Int {
+    func parseInt(expectedLength: Int? = nil) throws -> Int {
+        let initialLocation = scanner.scanLocation
+
         var result: Int = 0
 
         guard scanner.scanInt(&result) else {
-            throw ParsingError.unexpectedCharacter
+            throw ParsingError.unexpectedCharacter(index: scanner.scanLocation)
+        }
+
+        if let expectedLength = expectedLength {
+            let length = scanner.scanLocation - initialLocation
+            guard length == expectedLength else {
+                throw ParsingError.unexpectedIntLength(index: initialLocation)
+            }
         }
 
         return result
@@ -49,7 +72,7 @@ class Parser {
 
     func parseString(_ searchString: String) throws {
         guard scanner.scanString(searchString, into: nil) else {
-            throw ParsingError.unexpectedCharacter
+            throw ParsingError.unexpectedCharacter(index: scanner.scanLocation)
         }
     }
 
