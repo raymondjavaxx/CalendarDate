@@ -28,13 +28,26 @@ import Foundation
 /// Groups CalendarDate and CalendarTime to represent a date + time.
 public struct CalendarDateTime {
 
+    /// The date component of the date + time.
     public let date: CalendarDate
+
+    /// The time component of the date + time.
     public let time: CalendarTime
 
+    /// Whether or not the date + time is valid.
     public var isValid: Bool {
         return date.isValid && time.isValid
     }
 
+    /// Creates a new `CalendarDateTime`.
+    ///
+    /// - Parameters:
+    ///   - year: The year component of the date.
+    ///   - month: The month component of the date.
+    ///   - day: The day component of the date.
+    ///   - hour: The hour component of the time.
+    ///   - minute: The minute component of the time.
+    ///   - second: The second component of the time.
     public init(year: Int, month: Int, day: Int, hour: Int, minute: Int, second: Int = 0) {
         self.init(
             date: CalendarDate(year: year, month: month, day: day),
@@ -42,6 +55,11 @@ public struct CalendarDateTime {
         )
     }
 
+    /// Creates a new `CalendarDateTime`.
+    ///
+    /// - Parameters:
+    ///   - date: The date component of the date + time.
+    ///   - time: The time component of the date + time.
     public init(date: CalendarDate, time: CalendarTime) {
         self.date = date
         self.time = time
