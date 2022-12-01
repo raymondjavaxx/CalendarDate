@@ -1,7 +1,7 @@
 import XCTest
 @testable import CalendarDate
 
-class ParserTests: XCTestCase {
+final class ParserTests: XCTestCase {
 
     func testParseInt() throws {
         let parser = Parser(string: "12")

@@ -1,12 +1,11 @@
 import XCTest
 @testable import CalendarDate
 
-struct Event: Codable {
-    let date: CalendarDateTime
-    let timezone: String
-}
-
-class CodableTests: XCTestCase {
+final class CodableTests: XCTestCase {
+    struct MockEvent: Codable {
+        let date: CalendarDateTime
+        let timezone: String
+    }
 
     let encoder = JSONEncoder()
     let decoder = JSONDecoder()
@@ -16,13 +15,13 @@ class CodableTests: XCTestCase {
             {"date": "2019-11-05T10:45:00", "timezone": "America/New_York"}
         """
 
-        let event = try decoder.decode(Event.self, from: try XCTUnwrap(json.data(using: .utf8)))
+        let event = try decoder.decode(MockEvent.self, from: try XCTUnwrap(json.data(using: .utf8)))
 
         XCTAssertEqual(event.date, CalendarDateTime(year: 2019, month: 11, day: 5, hour: 10, minute: 45))
     }
 
     func testEncoding() throws {
-        let event = Event(
+        let event = MockEvent(
             date: CalendarDateTime(year: 2019, month: 11, day: 5, hour: 10, minute: 45),
             timezone: "America/New_York"
         )

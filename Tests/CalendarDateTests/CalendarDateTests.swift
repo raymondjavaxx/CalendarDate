@@ -1,7 +1,7 @@
 import XCTest
 @testable import CalendarDate
 
-class CalendarDateTests: XCTestCase {
+final class CalendarDateTests: XCTestCase {
 
     func testISO8601() {
         let date = CalendarDate(year: 2018, month: 6, day: 1)
