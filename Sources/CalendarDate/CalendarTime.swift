@@ -28,8 +28,19 @@ import Foundation
 /// Represents a wall time, such as "2:00 PM".
 public struct CalendarTime {
 
+    /// The hour component of the time.
+    ///
+    /// The value of this property is in the range 0...23.
     public let hour: Int
+
+    /// The minute component of the time.
+    ///
+    /// Valid values are 0 to 59.
     public let minute: Int
+
+    /// The second component of the time.
+    ///
+    /// Valid values are 0 to 59.
     public let second: Int
 
     /// Whether or not the time is valid.
@@ -41,6 +52,12 @@ public struct CalendarTime {
         )
     }
 
+    /// Creates a new `CalendarTime`.
+    ///
+    /// - Parameters:
+    ///   - hour: The hour component of the time.
+    ///   - minute: The minute component of the time.
+    ///   - second: The second component of the time.
     public init(hour: Int, minute: Int, second: Int) {
         self.hour = hour
         self.minute = minute

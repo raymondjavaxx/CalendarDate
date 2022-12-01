@@ -28,10 +28,22 @@ import Foundation
 /// Represents a calendar date, such as a birthday.
 public struct CalendarDate {
 
+    /// The year component of the date.
+    ///
+    /// The value of this property is in the range 1...9999.
     public let year: Int
+
+    /// The month component of the date.
+    ///
+    /// Valid values are 1 to 12.
     public let month: Int
+
+    /// The day component of the date.
+    ///
+    /// Valid values are 1 to 31.
     public let day: Int
 
+    /// Whether or not the date is valid.
     public var isValid: Bool {
         return components.isValidDate
     }
@@ -40,6 +52,12 @@ public struct CalendarDate {
         return DateComponents(calendar: .gregorian, year: year, month: month, day: day)
     }
 
+    /// Creates a new `CalendarDate`.
+    ///
+    /// - Parameters:
+    ///   - year: The year component of the date.
+    ///   - month: The month component of the date.
+    ///   - day: The day component of the date.
     public init(year: Int, month: Int, day: Int) {
         self.year = year
         self.month = month
