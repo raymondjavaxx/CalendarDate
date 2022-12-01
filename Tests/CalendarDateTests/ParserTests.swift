@@ -17,7 +17,9 @@ class ParserTests: XCTestCase {
 
     func testParseIntShouldRejectLeadingWhitespace() throws {
         let parser = Parser(string: " 12")
-        XCTAssertThrowsError(try parser.parseInt())
+        XCTAssertThrowsError(try parser.parseInt()) { error in
+            XCTAssertEqual(error.localizedDescription, "Unexpected character at index 0.")
+        }
     }
 
     func testParseIntWithExpectedLength() throws {
@@ -28,7 +30,9 @@ class ParserTests: XCTestCase {
 
     func testParseIntWithExpectedLengthShouldRejectWrongLength() throws {
         let parser = Parser(string: "123")
-        XCTAssertThrowsError(try parser.parseInt(expectedLength: 2))
+        XCTAssertThrowsError(try parser.parseInt(expectedLength: 2)) { error in
+            XCTAssertEqual(error.localizedDescription, "Unexpected integer length at index 0.")
+        }
     }
 
 }

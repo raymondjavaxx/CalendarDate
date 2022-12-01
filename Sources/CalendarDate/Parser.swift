@@ -26,11 +26,22 @@
 import Foundation
 
 enum ParsingError: Error {
-    case unexpectedCharacter
-    case unexpectedIntLength
+    case unexpectedCharacter(index: Int)
+    case unexpectedIntLength(index: Int)
 }
 
-class Parser {
+extension ParsingError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .unexpectedCharacter(let index):
+            return "Unexpected character at index \(index)."
+        case .unexpectedIntLength(let index):
+            return "Unexpected integer length at index \(index)."
+        }
+    }
+}
+
+final class Parser {
 
     private let scanner: Scanner
 
@@ -46,13 +57,13 @@ class Parser {
         var result: Int = 0
 
         guard scanner.scanInt(&result) else {
-            throw ParsingError.unexpectedCharacter
+            throw ParsingError.unexpectedCharacter(index: scanner.scanLocation)
         }
 
         if let expectedLength = expectedLength {
             let length = scanner.scanLocation - initialLocation
             guard length == expectedLength else {
-                throw ParsingError.unexpectedIntLength
+                throw ParsingError.unexpectedIntLength(index: initialLocation)
             }
         }
 
@@ -61,7 +72,7 @@ class Parser {
 
     func parseString(_ searchString: String) throws {
         guard scanner.scanString(searchString, into: nil) else {
-            throw ParsingError.unexpectedCharacter
+            throw ParsingError.unexpectedCharacter(index: scanner.scanLocation)
         }
     }
 
