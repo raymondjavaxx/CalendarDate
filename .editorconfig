@@ -11,6 +11,9 @@ charset = utf-8
 indent_style = space
 indent_size = 4
 
-[{.travis.yml,*.podspec}]
+[{*.yml,*.podspec}]
 indent_style = space
 indent_size = 2
+
+[Makfile]
+indent_style = tab
