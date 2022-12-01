@@ -45,6 +45,10 @@ final class Parser {
 
     private let scanner: Scanner
 
+    private var currentIndex: Int {
+        return scanner.currentIndex.utf16Offset(in: scanner.string)
+    }
+
     init(string: String) {
         self.scanner = Scanner(string: string)
         // `Scanner` will skip whitespace by default, so we need to disable that.
@@ -52,16 +56,16 @@ final class Parser {
     }
 
     func parseInt(expectedLength: Int? = nil) throws -> Int {
-        let initialLocation = scanner.scanLocation
+        let initialLocation = currentIndex
 
         var result: Int = 0
 
         guard scanner.scanInt(&result) else {
-            throw ParsingError.unexpectedCharacter(index: scanner.scanLocation)
+            throw ParsingError.unexpectedCharacter(index: currentIndex)
         }
 
         if let expectedLength = expectedLength {
-            let length = scanner.scanLocation - initialLocation
+            let length = currentIndex - initialLocation
             guard length == expectedLength else {
                 throw ParsingError.unexpectedIntLength(index: initialLocation)
             }
@@ -71,8 +75,8 @@ final class Parser {
     }
 
     func parseString(_ searchString: String) throws {
-        guard scanner.scanString(searchString, into: nil) else {
-            throw ParsingError.unexpectedCharacter(index: scanner.scanLocation)
+        guard scanner.scanString(searchString) != nil else {
+            throw ParsingError.unexpectedCharacter(index: currentIndex)
         }
     }
 

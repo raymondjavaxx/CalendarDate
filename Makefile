@@ -1,4 +1,7 @@
-.PHONY: lint format
+.PHONY: test lint format
+
+test:
+	swift test
 
 lint:
 	swiftlint
