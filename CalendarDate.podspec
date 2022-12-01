@@ -11,6 +11,8 @@ Pod::Spec.new do |s|
   s.osx.deployment_target  = "10.9"
   s.tvos.deployment_target = "11.0"
 
+  s.swift_version = "5.1"
+
   s.source       = { :git => "https://github.com/raymondjavaxx/CalendarDate.git", :tag => "#{s.version}" }
   s.source_files = "Sources/CalendarDate/*.swift"
 end
