@@ -8,16 +8,40 @@ final class CalendarDateTests: XCTestCase {
         XCTAssertEqual(date.iso8601(), "2018-06-01")
     }
 
-    func testComparing() {
-        let earlier = CalendarDate(year: 1955, month: 2, day: 24)
-        let later = CalendarDate(year: 1955, month: 10, day: 28)
+    func testComparingYear() {
+        let earlier = CalendarDate(year: 2000, month: 10, day: 28)
+        let later = CalendarDate(year: 2001, month: 10, day: 28)
+
         XCTAssertTrue(later > earlier)
+        XCTAssertFalse(later < earlier)
+    }
+
+    func testComparingMonth() {
+        let earlier = CalendarDate(year: 2001, month: 9, day: 28)
+        let later = CalendarDate(year: 2001, month: 10, day: 28)
+
+        XCTAssertTrue(later > earlier)
+        XCTAssertFalse(later < earlier)
+    }
+
+    func testComparingDay() {
+        let earlier = CalendarDate(year: 2001, month: 10, day: 27)
+        let later = CalendarDate(year: 2001, month: 10, day: 28)
+
+        XCTAssertTrue(later > earlier)
+        XCTAssertFalse(later < earlier)
     }
 
     func testComparingWithEqualValues() {
-        let first = CalendarDate(year: 2019, month: 11, day: 3)
-        let second = CalendarDate(year: 2019, month: 11, day: 3)
+        let first = CalendarDate(year: 2000, month: 11, day: 3)
+        let second = CalendarDate(year: 2000, month: 11, day: 3)
         XCTAssertTrue(first == second)
+    }
+
+    func testComparingWithDifferentValues() {
+        let first = CalendarDate(year: 2000, month: 11, day: 3)
+        let second = CalendarDate(year: 2000, month: 11, day: 4)
+        XCTAssertFalse(first == second)
     }
 
 }
