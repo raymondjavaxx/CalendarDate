@@ -8,7 +8,7 @@ jobs:
   build-macos:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Build
         run: swift build -v
       - name: Run tests
@@ -16,7 +16,7 @@ jobs:
   build-linux:
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: YOCKOW/Action-setup-swift@v1
         with:
           swift-version: 5.1
