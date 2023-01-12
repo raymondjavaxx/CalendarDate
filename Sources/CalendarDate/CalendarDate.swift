@@ -96,11 +96,7 @@ public struct CalendarDate {
 extension CalendarDate: Comparable {
 
     public static func < (lhs: CalendarDate, rhs: CalendarDate) -> Bool {
-        return (
-            lhs.year  < rhs.year  ||
-            lhs.month < rhs.month ||
-            lhs.day   < rhs.day
-        )
+        return (lhs.year, lhs.month, lhs.day) < (rhs.year, rhs.month, rhs.day)
     }
 
     public static func == (lhs: CalendarDate, rhs: CalendarDate) -> Bool {
