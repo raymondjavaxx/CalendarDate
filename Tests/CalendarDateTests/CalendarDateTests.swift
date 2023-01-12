@@ -12,36 +12,38 @@ final class CalendarDateTests: XCTestCase {
         let earlier = CalendarDate(year: 2000, month: 10, day: 28)
         let later = CalendarDate(year: 2001, month: 10, day: 28)
 
-        XCTAssertTrue(later > earlier)
-        XCTAssertFalse(later < earlier)
+        XCTAssertLessThan(earlier, later)
+        XCTAssertGreaterThan(later, earlier)
     }
 
     func testComparingMonth() {
         let earlier = CalendarDate(year: 2001, month: 9, day: 28)
         let later = CalendarDate(year: 2001, month: 10, day: 28)
 
-        XCTAssertTrue(later > earlier)
-        XCTAssertFalse(later < earlier)
+        XCTAssertLessThan(earlier, later)
+        XCTAssertGreaterThan(later, earlier)
     }
 
     func testComparingDay() {
         let earlier = CalendarDate(year: 2001, month: 10, day: 27)
         let later = CalendarDate(year: 2001, month: 10, day: 28)
 
-        XCTAssertTrue(later > earlier)
-        XCTAssertFalse(later < earlier)
+        XCTAssertLessThan(earlier, later)
+        XCTAssertGreaterThan(later, earlier)
     }
 
     func testComparingWithEqualValues() {
         let first = CalendarDate(year: 2000, month: 11, day: 3)
         let second = CalendarDate(year: 2000, month: 11, day: 3)
-        XCTAssertTrue(first == second)
+
+        XCTAssertEqual(first, second)
     }
 
     func testComparingWithDifferentValues() {
         let first = CalendarDate(year: 2000, month: 11, day: 3)
         let second = CalendarDate(year: 2000, month: 11, day: 4)
-        XCTAssertFalse(first == second)
+
+        XCTAssertNotEqual(first, second)
     }
 
 }

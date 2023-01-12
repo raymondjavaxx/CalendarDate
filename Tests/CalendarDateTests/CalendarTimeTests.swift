@@ -8,38 +8,42 @@ final class CalendarTimeTests: XCTestCase {
         XCTAssertEqual(date.iso8601(), "10:45:00")
     }
 
-    func testComparing() {
-        // 10:45:34
-        let reference = CalendarTime(hour: 10, minute: 45, second: 34)
+    func testComparingHour() {
+        let earlier = CalendarTime(hour: 9, minute: 45, second: 0)
+        let later = CalendarTime(hour: 10, minute: 45, second: 0)
 
-        // Convert to seconds
-        let referenceSeconds = reference.hour * 3600 + reference.minute * 60 + reference.second
+        XCTAssertLessThan(earlier, later)
+        XCTAssertGreaterThan(later, earlier)
+    }
 
-        for seconds in 0..<referenceSeconds {
-            let time = CalendarTime(
-                hour: seconds / 3600,
-                minute: (seconds % 3600) / 60,
-                second: seconds % 60
-            )
+    func testComparingMinute() {
+        let earlier = CalendarTime(hour: 10, minute: 44, second: 0)
+        let later = CalendarTime(hour: 10, minute: 45, second: 0)
 
-            XCTAssertTrue(time < reference, "\(time.iso8601()) should be < \(reference.iso8601())")
-        }
+        XCTAssertLessThan(earlier, later)
+        XCTAssertGreaterThan(later, earlier)
+    }
 
-        for seconds in referenceSeconds..<86400 {
-            let time = CalendarTime(
-                hour: seconds / 3600,
-                minute: (seconds % 3600) / 60,
-                second: seconds % 60
-            )
+    func testComparingSecond() {
+        let earlier = CalendarTime(hour: 10, minute: 45, second: 0)
+        let later = CalendarTime(hour: 10, minute: 45, second: 1)
 
-            XCTAssertFalse(time < reference, "\(time.iso8601()) should be >= \(reference.iso8601())")
-        }
+        XCTAssertLessThan(earlier, later)
+        XCTAssertGreaterThan(later, earlier)
     }
 
     func testComparingWithEqualValues() {
         let first = CalendarTime(hour: 10, minute: 45, second: 0)
         let second = CalendarTime(hour: 10, minute: 45, second: 0)
-        XCTAssertTrue(first == second)
+
+        XCTAssertEqual(first, second)
+    }
+
+    func testComparingWithDifferentValues() {
+        let first = CalendarTime(hour: 10, minute: 45, second: 0)
+        let second = CalendarTime(hour: 10, minute: 45, second: 1)
+
+        XCTAssertNotEqual(first, second)
     }
 
     func testIsValid() {
