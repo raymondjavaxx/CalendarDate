@@ -95,11 +95,7 @@ public struct CalendarTime {
 extension CalendarTime: Comparable {
 
     public static func < (lhs: CalendarTime, rhs: CalendarTime) -> Bool {
-        return (
-            lhs.hour   < rhs.hour   ||
-            lhs.minute < rhs.minute ||
-            lhs.second < rhs.second
-        )
+        return (lhs.hour, lhs.minute, lhs.second) < (rhs.hour, rhs.minute, rhs.second)
     }
 
     public static func == (lhs: CalendarTime, rhs: CalendarTime) -> Bool {

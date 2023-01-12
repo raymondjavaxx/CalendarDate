@@ -9,9 +9,31 @@ final class CalendarTimeTests: XCTestCase {
     }
 
     func testComparing() {
-        let earlier = CalendarTime(hour: 10, minute: 45, second: 0)
-        let later = CalendarTime(hour: 11, minute: 45, second: 0)
-        XCTAssertTrue(later > earlier)
+        // 10:45:34
+        let reference = CalendarTime(hour: 10, minute: 45, second: 34)
+
+        // Convert to seconds
+        let referenceSeconds = reference.hour * 3600 + reference.minute * 60 + reference.second
+
+        for seconds in 0..<referenceSeconds {
+            let time = CalendarTime(
+                hour: seconds / 3600,
+                minute: (seconds % 3600) / 60,
+                second: seconds % 60
+            )
+
+            XCTAssertTrue(time < reference, "\(time.iso8601()) should be < \(reference.iso8601())")
+        }
+
+        for seconds in referenceSeconds..<86400 {
+            let time = CalendarTime(
+                hour: seconds / 3600,
+                minute: (seconds % 3600) / 60,
+                second: seconds % 60
+            )
+
+            XCTAssertFalse(time < reference, "\(time.iso8601()) should be >= \(reference.iso8601())")
+        }
     }
 
     func testComparingWithEqualValues() {
