@@ -101,10 +101,7 @@ public struct CalendarDateTime {
 extension CalendarDateTime: Comparable {
 
     public static func < (lhs: CalendarDateTime, rhs: CalendarDateTime) -> Bool {
-        return (
-            lhs.date < rhs.date &&
-            lhs.time < rhs.time
-        )
+        return (lhs.date, lhs.time) < (rhs.date, rhs.time)
     }
 
     public static func == (lhs: CalendarDateTime, rhs: CalendarDateTime) -> Bool {
